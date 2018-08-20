@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "483563471588",
+    "firebase_url": "https://praca-inzynierska-omm-omm-site.firebaseio.com",
+    "project_id": "praca-inzynierska-omm-omm-site",
+    "storage_bucket": "praca-inzynierska-omm-omm-site.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483563471588:android:42f148c49122a061",
+        "android_client_info": {
+          "package_name": "com.ommomm.t1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483563471588-t14khq76baej855bdg0ve4d7184iso7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ommomm.t1",
+            "certificate_hash": "4868ad619177f3249a4bbfbdb777c023f8f676c9"
+          }
+        },
+        {
+          "client_id": "483563471588-vqhk4qol737fio3vlg1lrb5ffcnk1fc8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaXu9CUf9aIz0LD3xtpmVb_8n735Hcyug"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483563471588-vqhk4qol737fio3vlg1lrb5ffcnk1fc8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

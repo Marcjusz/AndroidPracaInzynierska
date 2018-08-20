@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_lokale"
+            android:icon="@drawable/baseline_store_24"
+            android:title="Lokale" />
+        <item
+            android:id="@+id/nav_actual_oferts"
+            android:icon="@drawable/baseline_fastfood_24"
+            android:title="Aktualne oferty" />
+    </group>
+
+    <item android:title="Zamówienia">
+        <menu>
+            <item
+                android:id="@+id/nav_actual_orders"
+                android:icon="@drawable/baseline_event_note_24"
+                android:title="Aktualne zamówienia" />
+            <item
+                android:id="@+id/nav_finish_orders"
+                android:icon="@drawable/baseline_event_available_24"
+                android:title="Odebrane zamówienia" />
+            <item
+                android:id="@+id/nav_cancel_orders"
+                android:icon="@drawable/baseline_event_busy_24"
+                android:title="Anulowane/Nieodebrane" />
+            <item
+                android:id="@+id/nav_history_oferts"
+                android:icon="@drawable/baseline_folder_24"
+                android:title="Historia ofert" />
+        </menu>
+    </item>
+
+    <item android:title="Profil">
+        <menu>
+            <item
+                android:id="@+id/nav_wiadomosci"
+                android:title="Wiadomośći"
+                android:icon="@drawable/baseline_message_24"
+                />
+            <item
+                android:id="@+id/nav_edytuj"
+                android:title="Edytuj konto"
+                android:icon="@drawable/ic_menu_manage"
+                />
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Wyloguj"
+                android:icon="@drawable/baseline_arrow_back_24"
+                />
+        </menu>
+    </item>
+
+</menu>

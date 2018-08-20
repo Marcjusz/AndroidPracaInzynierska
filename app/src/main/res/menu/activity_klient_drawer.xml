@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_szukaj"
+            android:title="Przeglądaj promocje"
+            android:icon="@drawable/baseline_shopping_basket_24"
+            />
+        <item
+            android:id="@+id/nav_zamowienia"
+            android:title="Aktualne zamówienia"
+            android:icon="@drawable/baseline_shopping_basket_24"
+            />
+        <item
+            android:id="@+id/nav_ulubione"
+            android:title="Ulubione lokale"
+            android:icon="@drawable/baseline_favorite_24"
+            />
+        <item
+            android:id="@+id/nav_historia"
+            android:title="Historia zamówień"
+            android:icon="@drawable/baseline_date_range_24"
+            />
+        <item
+            android:id="@+id/nav_platnosci"
+            android:title="Płatności"
+            android:icon="@drawable/baseline_euro_symbol_24"
+            />
+    </group>
+
+    <item android:title="Profil">
+        <menu>
+            <item
+                android:id="@+id/nav_wiadomosci"
+                android:title="Wiadomośći"
+                android:icon="@drawable/baseline_message_24"
+                />
+            <item
+                android:id="@+id/nav_edytuj"
+                android:title="Edytuj konto"
+                android:icon="@drawable/ic_menu_manage"
+                />
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Wyloguj"
+                android:icon="@drawable/baseline_arrow_back_24"
+                />
+        </menu>
+    </item>
+
+    <item android:title="Serwis OmmOmm">
+        <menu>
+            <item
+                android:id="@+id/nav_info"
+                android:title="Informacje o serwisie"
+                android:icon="@drawable/baseline_info_24"
+                />
+        </menu>
+    </item>
+</menu>

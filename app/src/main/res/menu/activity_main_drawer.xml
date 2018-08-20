@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:title="Zaloguj się"
+            android:icon="@drawable/baseline_account_box_24"
+            />
+        <item
+            android:id="@+id/nav_sign_up"
+            android:title="załóż konto "
+            android:icon="@drawable/baseline_assignment_24"
+            />
+    </group>
+    <item android:title="Serwis OmmOmm">
+        <menu>
+            <item
+                android:id="@+id/nav_info"
+                android:title="Informacje o serwisie"
+                android:icon="@drawable/baseline_info_24"
+                />
+            <item
+                android:id="@+id/nav_kontakt"
+                android:title="Kontakt"
+                android:icon="@drawable/ic_menu_send"
+                />
+        </menu>
+    </item>
+
+
+</menu>
