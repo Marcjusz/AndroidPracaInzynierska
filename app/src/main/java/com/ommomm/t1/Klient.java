@@ -8,6 +8,7 @@ import android.print.PrintAttributes;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.LinearLayout.LayoutParams;
 import android.text.TextUtils;
@@ -45,9 +46,11 @@ public class Klient extends AppCompatActivity
     private FirebaseAuth mAuth;
     boolean doubleClickBack;
 
+    private ViewPager viewPager;
 
     EditText editTextKontaktKontakt;
     EditText editTextKontaktTresc;
+    BazaOferta bazaOferta;
 
     DatabaseReference database;
     EditText editTextEdycjaImie;
@@ -59,6 +62,8 @@ public class Klient extends AppCompatActivity
 
     LinearLayout linearLayoutContent;
     ArrayList<String> listWiadomoscID =new ArrayList<>();
+    ArrayList<String> listaOfertID =new ArrayList<>();
+    ArrayList<BazaOferta> bazaOfertas =new ArrayList<>();
 
 
 
@@ -70,6 +75,7 @@ public class Klient extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
 
         database = FirebaseDatabase.getInstance().getReference();
+
 
 
         super.onCreate(savedInstanceState);
@@ -89,6 +95,8 @@ public class Klient extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         edditHeader();
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
     }
 
     @Override
@@ -144,6 +152,7 @@ public class Klient extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         linearLayoutContent = (LinearLayout) findViewById(R.id.linear_klient_content);
         linearLayoutContent.removeAllViews();
+        viewPager.removeAllViews();
 
         if (id == R.id.nav_logout) {
             mAuth.signOut();
@@ -156,11 +165,39 @@ public class Klient extends AppCompatActivity
             fragmentProfilEdycja();
         } else if (id == R.id.nav_wiadomosci){
             fragmentWiadomosc();
+        } else if (id == R.id.nav_szukaj){
+            fragmentSzukaj();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void fragmentSzukaj() {
+
+        database.child("Danie").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()){
+                    bazaOferta=childSnapshot.getValue(BazaOferta.class);
+                    listaOfertID.add(childSnapshot.getKey());
+                    bazaOfertas.add(childSnapshot.getValue(BazaOferta.class));
+                    Log.d("odczyt", "Value is: " + bazaOferta.getNazwa());
+                }
+                viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), listaOfertID, bazaOfertas));
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("odczyt", "Failed to read value.", error.toException());
+            }
+        });
+
+
+        /*KlientSzukaj klientSzukaj = new KlientSzukaj();
+        fragmentManager.beginTransaction().replace(R.id.fragment, klientSzukaj).commit();
+    */
     }
 
     public void fragmentKontakt(){

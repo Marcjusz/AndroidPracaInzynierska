@@ -15,11 +15,6 @@
             android:icon="@drawable/baseline_shopping_basket_24"
             />
         <item
-            android:id="@+id/nav_ulubione"
-            android:title="Ulubione lokale"
-            android:icon="@drawable/baseline_favorite_24"
-            />
-        <item
             android:id="@+id/nav_historia"
             android:title="Historia zamówień"
             android:icon="@drawable/baseline_date_range_24"

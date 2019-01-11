@@ -1,33 +1,19 @@
 package com.ommomm.t1;
 
 public class BazaOferta {
+
+    String ilosc;
+    String cena_regularna;
+    String czas_przygotowania;
+    String data_odbioru;
+    String data_odbioruK;
+    String firma;
+    String lokal;
     String nazwa;
     String opis;
     String rabat;
-    String kat;
     String zdjecie;
-    String cena;
-    String czas_przygotowania;
-    String data_odbioru;
-    String data_odbioruk;
-    String ilosc;
 
-    BazaOferta(){
-
-    }
-
-    public BazaOferta(String nazwa, String opis, String rabat, String kat, String zdjecie, String cena, String czas_przygotowania, String data_odbioru, String data_odbioruk, String ilosc) {
-        this.nazwa = nazwa;
-        this.opis = opis;
-        this.rabat = rabat;
-        this.kat = kat;
-        this.zdjecie = zdjecie;
-        this.cena = cena;
-        this.czas_przygotowania = czas_przygotowania;
-        this.data_odbioru = data_odbioru;
-        this.data_odbioruk = data_odbioruk;
-        this.ilosc = ilosc;
-    }
 
     public String getNazwa() {
         return nazwa;
@@ -53,14 +39,6 @@ public class BazaOferta {
         this.rabat = rabat;
     }
 
-    public String getKat() {
-        return kat;
-    }
-
-    public void setKat(String kat) {
-        this.kat = kat;
-    }
-
     public String getZdjecie() {
         return zdjecie;
     }
@@ -69,12 +47,12 @@ public class BazaOferta {
         this.zdjecie = zdjecie;
     }
 
-    public String getCena() {
-        return cena;
+    public String getCena_regularna() {
+        return cena_regularna;
     }
 
-    public void setCena(String cena) {
-        this.cena = cena;
+    public void setCena_regularna(String cena_regularna) {
+        this.cena_regularna = cena_regularna;
     }
 
     public String getCzas_przygotowania() {
@@ -93,12 +71,12 @@ public class BazaOferta {
         this.data_odbioru = data_odbioru;
     }
 
-    public String getData_odbioruk() {
-        return data_odbioruk;
+    public String getData_odbioruK() {
+        return data_odbioruK;
     }
 
-    public void setData_odbioruk(String data_odbioruk) {
-        this.data_odbioruk = data_odbioruk;
+    public void setData_odbioruK(String data_odbioruK) {
+        this.data_odbioruK = data_odbioruK;
     }
 
     public String getIlosc() {
@@ -108,4 +86,40 @@ public class BazaOferta {
     public void setIlosc(String ilosc) {
         this.ilosc = ilosc;
     }
+
+    public String getFirma() {
+        return firma;
+    }
+
+    public void setFirma(String firma) {
+        this.firma = firma;
+    }
+
+    public String getLokal() {
+        return lokal;
+    }
+
+    public void setLokal(String lokal) {
+        this.lokal = lokal;
+    }
+
+    public BazaOferta(String nazwa, String opis, String rabat, String zdjecie, String cena_regularna, String czas_przygotowania, String data_odbioru, String data_odbioruK, String ilosc, String firma, String lokal) {
+        this.nazwa = nazwa;
+        this.opis = opis;
+        this.rabat = rabat;
+        this.zdjecie = zdjecie;
+        this.cena_regularna = cena_regularna;
+        this.czas_przygotowania = czas_przygotowania;
+        this.data_odbioru = data_odbioru;
+        this.data_odbioruK = data_odbioruK;
+        this.ilosc = ilosc;
+        this.firma = firma;
+        this.lokal = lokal;
+    }
+
+    BazaOferta(){
+
+    }
+
+
 }
