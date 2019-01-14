@@ -76,6 +76,8 @@ public class Firma extends AppCompatActivity
     EditText editTextLokalPhoto3;
     int flag;
 
+    private String lokalID;
+
     ArrayList<String> listaLokalID =new ArrayList<>();
 
     @Override
@@ -439,18 +441,18 @@ public class Firma extends AppCompatActivity
     }
 
     public void fragmentDanie(){
-
+        flag=0;
         database.child("Firma").child(mAuth.getUid()).child("Lokal").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                flag=0;
+
                 for (final DataSnapshot childSnapshot: snapshot.getChildren()) {
                     listBazaLokal.add(childSnapshot.getValue(BazaLokal.class));
                     listaLokalID.add(childSnapshot.getKey());
                     bazaLokal = childSnapshot.getValue(BazaLokal.class);
                     database.child("Firma").child(mAuth.getUid()).child("Lokal").child(childSnapshot.getKey()).child("Oferta").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                             linearLayoutContent = (LinearLayout) findViewById(R.id.linear_firma_content);
                             TextView textView1 = new TextView(Firma.this);
                             textView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -463,9 +465,35 @@ public class Firma extends AppCompatActivity
                             LinearLayout.LayoutParams layoutParams = new
                                     LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                                     LinearLayout.LayoutParams.WRAP_CONTENT);
-                            layoutParams.setMargins(20, 20, 30, 10);
+                            layoutParams.setMargins(20, 20, 30, 0);
                             textView1.setId(listaLokalID.size());
                             linearLayoutContent.addView(textView1, layoutParams);
+
+                            linearLayoutContent = (LinearLayout) findViewById(R.id.linear_firma_content);
+                            final Button buttonLokalAdd = new Button(Firma.this);
+                            buttonLokalAdd.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT));
+                            buttonLokalAdd.setText("Dodaj oferte");
+                            buttonLokalAdd.setId(flag-1);
+                            buttonLokalAdd.setPadding(20,15,20,15);
+                            buttonLokalAdd.setTextSize(20);
+                            buttonLokalAdd.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("lokalID",listBazaLokal.get(v.getId()).getNazwa());
+                                    linearLayoutContent.removeAllViews();
+                                    FirmaDanieNowe firmaDanieNowe = new FirmaDanieNowe();
+                                    firmaDanieNowe.setArguments(bundle);
+                                    fragmentManager.beginTransaction().replace(R.id.fragment, firmaDanieNowe).commit();
+                                }
+                            });
+                            LinearLayout.LayoutParams layoutParams3 = new
+                                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT);
+                            layoutParams3.setMargins(20, 0, 30, 10);
+                            linearLayoutContent.addView(buttonLokalAdd, layoutParams3);
+
 
                             for (final DataSnapshot childSnapshot: dataSnapshot.getChildren()){
                                 bazaOferta = childSnapshot.getValue(BazaOferta.class);
@@ -483,29 +511,6 @@ public class Firma extends AppCompatActivity
                                 layoutParams2.setMargins(120, 20, 30, 10);
                                 linearLayoutContent.addView(textView2, layoutParams2);
                             }
-                            if(flag==listBazaLokal.size())
-                            {
-                                linearLayoutContent = (LinearLayout) findViewById(R.id.linear_firma_content);
-                                final Button buttonLokalAdd = new Button(Firma.this);
-                                buttonLokalAdd.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                        ViewGroup.LayoutParams.MATCH_PARENT));
-                                buttonLokalAdd.setText("Dodaj oferte");
-                                buttonLokalAdd.setPadding(20,15,20,15);
-                                buttonLokalAdd.setTextSize(20);
-                                buttonLokalAdd.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        linearLayoutContent.removeAllViews();
-                                        FirmaDanieNowe firmaDanieNowe = new FirmaDanieNowe();
-                                        fragmentManager.beginTransaction().replace(R.id.fragment, firmaDanieNowe).commit();
-                                    }
-                                });
-                                LinearLayout.LayoutParams layoutParams3 = new
-                                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                                layoutParams3.setMargins(20, 20, 30, 10);
-                                linearLayoutContent.addView(buttonLokalAdd, layoutParams3);
-                            }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -518,6 +523,7 @@ public class Firma extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
 
     }
 

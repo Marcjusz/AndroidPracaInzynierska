@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="Nazwa Lokalu"
+                    android:hint="Nazwa"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -56,8 +56,8 @@
                 <EditText android:id="@+id/input_DanieNazwa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Nazwa Oferty"
+                    android:inputType="number"
+                    android:hint="Cena"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Opis dania"
+                    android:hint="Rabat"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -87,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Cena regularna"
+                    android:hint="ilość oferowanych sztuk"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="Ilość porcji"
+                    android:hint="początek promocji"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -117,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="Udzielany rabat (min 40%)"
+                    android:hint="koniec promocji"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -132,52 +132,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="Rodzaj posiłku"
+                    android:hint="cza potrzebny na przygotowanie"
                     />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="@dimen/margin_InputText"
-                android:layout_marginBottom="@dimen/margin_InputText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 >
-                <EditText android:id="@+id/input_DanieCzasPrzygotowania"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <EditText android:id="@+id/inputDanieLokal"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:inputType="text"
-                    android:hint="Czas przygotowania"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="@dimen/margin_InputText"
-                android:layout_marginBottom="@dimen/margin_InputText"
-                >
-                <EditText android:id="@+id/input_DanieGddzinaOdbioru"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Godzina Odbioru"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="@dimen/margin_InputText"
-                android:layout_marginBottom="@dimen/margin_InputText"
-                >
-                <EditText android:id="@+id/input_GodzinaOdbioruK"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Godzina Konca Odbioru"
+                    android:visibility="invisible"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -189,7 +156,7 @@
                 android:layout_marginTop="@dimen/margin_button"
                 android:layout_marginBottom="@dimen/margin_button"
                 android:padding="@dimen/padding_button"
-                android:text="Ogłoś"
+                android:text="Zamieść"
                 />
 
         </LinearLayout>
