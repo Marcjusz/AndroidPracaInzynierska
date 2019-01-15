@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -74,6 +75,18 @@ public class Firma extends AppCompatActivity
     EditText editTextLokalPhoto1;
     EditText editTextLokalPhoto2;
     EditText editTextLokalPhoto3;
+
+    private EditText editTextDanieNazwa;
+    private EditText editTextDanieCena;
+    private EditText editTextDanieRabat;
+    private EditText editTextDanieIlosc;
+    private EditText editTextDanieOd;
+    private EditText editTextDanieDo;
+    private EditText editTextDanieCzas;
+    private EditText editTextDanieOpis;
+    private EditText editTextDanieLokal;
+    private String DanielokalID;
+
     int flag;
 
     private String lokalID;
@@ -449,6 +462,7 @@ public class Firma extends AppCompatActivity
                 for (final DataSnapshot childSnapshot: snapshot.getChildren()) {
                     listBazaLokal.add(childSnapshot.getValue(BazaLokal.class));
                     listaLokalID.add(childSnapshot.getKey());
+                    DanielokalID = childSnapshot.getKey();
                     bazaLokal = childSnapshot.getValue(BazaLokal.class);
                     database.child("Firma").child(mAuth.getUid()).child("Lokal").child(childSnapshot.getKey()).child("Oferta").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -481,7 +495,7 @@ public class Firma extends AppCompatActivity
                                 @Override
                                 public void onClick(View v) {
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("lokalID",listBazaLokal.get(v.getId()).getNazwa());
+                                    bundle.putString("lokalID",DanielokalID);
                                     linearLayoutContent.removeAllViews();
                                     FirmaDanieNowe firmaDanieNowe = new FirmaDanieNowe();
                                     firmaDanieNowe.setArguments(bundle);
@@ -525,6 +539,44 @@ public class Firma extends AppCompatActivity
         });
 
 
+    }
+
+    public void dodajDanie(View view){
+        editTextDanieNazwa =findViewById(R.id.inputDanieNazwa);
+        editTextDanieCena = findViewById(R.id.inputDanieCena);
+        editTextDanieRabat = findViewById(R.id.inputDanieRabat);
+        editTextDanieIlosc = findViewById(R.id.inputDanieIlosc);
+        editTextDanieOd = findViewById(R.id.inputDanieOd);
+        editTextDanieDo = findViewById(R.id.inputDanieDo);
+        editTextDanieCzas = findViewById(R.id.inputDanieCzas);
+        editTextDanieOpis = findViewById(R.id.inputDanieOpis);
+        editTextDanieLokal = findViewById(R.id.inputDanieLokal);
+
+        BazaOferta bazaOferta = new BazaOferta(editTextDanieNazwa.getText().toString().trim(),
+                editTextDanieOpis.getText().toString().trim(),
+                editTextDanieRabat.getText().toString().trim(),
+                "null",
+                editTextDanieCena.getText().toString().trim(),
+                editTextDanieCzas.getText().toString().trim(),
+                editTextDanieOd.getText().toString().trim(),
+                editTextDanieDo.getText().toString().trim(),
+                editTextDanieIlosc.getText().toString().trim(),
+                mAuth.getUid(),
+                editTextDanieLokal.getText().toString().trim());
+
+        String key = database.push().getKey();
+
+        database.child("Danie").child(key).setValue(bazaOferta);
+        database.child("Firma").child(mAuth.getUid()).child("LokalOferta").child(editTextDanieLokal.getText().toString().trim()).child(key).setValue("1");
+
+        //Toast.makeText(Firma.this, "Dodano" + bazaOferta.getNazwa(),Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(Firma.this, key,Toast.LENGTH_SHORT).show();
+
+        android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+        if(fragment != null)
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        fragmentDanie();
     }
 
     @Override

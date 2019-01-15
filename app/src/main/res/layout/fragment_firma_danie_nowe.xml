@@ -38,7 +38,7 @@
                 android:layout_marginTop="@dimen/margin_InputText"
                 android:layout_marginBottom="@dimen/margin_InputText"
                 >
-                <EditText android:id="@+id/input_DanieLokal"
+                <EditText android:id="@+id/inputDanieNazwa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -53,11 +53,11 @@
                 android:layout_marginTop="@dimen/margin_InputText"
                 android:layout_marginBottom="@dimen/margin_InputText"
                 >
-                <EditText android:id="@+id/input_DanieNazwa"
+                <EditText android:id="@+id/inputDanieCena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Cena"
+                    android:hint="Cena regularna"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -68,7 +68,7 @@
                 android:layout_marginTop="@dimen/margin_InputText"
                 android:layout_marginBottom="@dimen/margin_InputText"
                 >
-                <EditText android:id="@+id/input_DanieOpis"
+                <EditText android:id="@+id/inputDanieRabat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="@dimen/margin_InputText"
                 android:layout_marginBottom="@dimen/margin_InputText"
                 >
-                <EditText android:id="@+id/input_DanieCena"
+                <EditText android:id="@+id/inputDanieIlosc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -98,7 +98,7 @@
                 android:layout_marginTop="@dimen/margin_InputText"
                 android:layout_marginBottom="@dimen/margin_InputText"
                 >
-                <EditText android:id="@+id/input_DanieIlosc"
+                <EditText android:id="@+id/inputDanieOd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -113,7 +113,7 @@
                 android:layout_marginTop="@dimen/margin_InputText"
                 android:layout_marginBottom="@dimen/margin_InputText"
                 >
-                <EditText android:id="@+id/input_DanieRabat"
+                <EditText android:id="@+id/inputDanieDo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -128,11 +128,26 @@
                 android:layout_marginTop="@dimen/margin_InputText"
                 android:layout_marginBottom="@dimen/margin_InputText"
                 >
-                <EditText android:id="@+id/input_DanieKategoria"
+                <EditText android:id="@+id/inputDanieCzas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:hint="cza potrzebny na przygotowanie"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="@dimen/margin_InputText"
+                android:layout_marginBottom="@dimen/margin_InputText"
+                >
+                <EditText android:id="@+id/inputDanieOpis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="opis"
                     />
             </android.support.design.widget.TextInputLayout>
 
