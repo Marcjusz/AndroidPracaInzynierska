@@ -42,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
 
 
 public class Firma extends AppCompatActivity
@@ -85,7 +86,7 @@ public class Firma extends AppCompatActivity
     private EditText editTextDanieCzas;
     private EditText editTextDanieOpis;
     private EditText editTextDanieLokal;
-    private String DanielokalID;
+
 
     int flag;
 
@@ -454,19 +455,24 @@ public class Firma extends AppCompatActivity
     }
 
     public void fragmentDanie(){
+
         flag=0;
         database.child("Firma").child(mAuth.getUid()).child("Lokal").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 for (final DataSnapshot childSnapshot: snapshot.getChildren()) {
+
                     listBazaLokal.add(childSnapshot.getValue(BazaLokal.class));
                     listaLokalID.add(childSnapshot.getKey());
-                    DanielokalID = childSnapshot.getKey();
                     bazaLokal = childSnapshot.getValue(BazaLokal.class);
-                    database.child("Firma").child(mAuth.getUid()).child("Lokal").child(childSnapshot.getKey()).child("Oferta").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+
+                    database.child("Firma").child(mAuth.getUid()).child("LokalOferta").child(childSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                        public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
+
                             linearLayoutContent = (LinearLayout) findViewById(R.id.linear_firma_content);
                             TextView textView1 = new TextView(Firma.this);
                             textView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -483,6 +489,8 @@ public class Firma extends AppCompatActivity
                             textView1.setId(listaLokalID.size());
                             linearLayoutContent.addView(textView1, layoutParams);
 
+
+
                             linearLayoutContent = (LinearLayout) findViewById(R.id.linear_firma_content);
                             final Button buttonLokalAdd = new Button(Firma.this);
                             buttonLokalAdd.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -495,7 +503,7 @@ public class Firma extends AppCompatActivity
                                 @Override
                                 public void onClick(View v) {
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("lokalID",DanielokalID);
+                                    bundle.putString("lokalID",listaLokalID.get(buttonLokalAdd.getId()));
                                     linearLayoutContent.removeAllViews();
                                     FirmaDanieNowe firmaDanieNowe = new FirmaDanieNowe();
                                     firmaDanieNowe.setArguments(bundle);
@@ -509,22 +517,41 @@ public class Firma extends AppCompatActivity
                             linearLayoutContent.addView(buttonLokalAdd, layoutParams3);
 
 
-                            for (final DataSnapshot childSnapshot: dataSnapshot.getChildren()){
-                                bazaOferta = childSnapshot.getValue(BazaOferta.class);
-                                linearLayoutContent = (LinearLayout) findViewById(R.id.linear_firma_content);
-                                TextView textView2 = new TextView(Firma.this);
-                                textView2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                                textView2.setText(bazaOferta.getNazwa());
-                                textView2.setPadding(20, 10, 20, 10);
-                                textView2.setTextSize(20);
-                                textView2.setBackgroundColor(0xffffffff);
-                                LinearLayout.LayoutParams layoutParams2 = new
-                                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                                layoutParams2.setMargins(120, 20, 30, 10);
-                                linearLayoutContent.addView(textView2, layoutParams2);
+
+                            for ( DataSnapshot childSnapshot: dataSnapshot.getChildren()){
+                                
+                                //Toast.makeText(Firma.this, childSnapshot.getKey(),Toast.LENGTH_SHORT).show();
+
+                                database.child("Danie").child(childSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener(){
+
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                       bazaOferta = dataSnapshot.getValue(BazaOferta.class);
+
+                                        linearLayoutContent = (LinearLayout) findViewById(R.id.linear_firma_content);
+                                        TextView textView2 = new TextView(Firma.this);
+                                        textView2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT));
+                                        textView2.setText(bazaOferta.getNazwa());
+                                        textView2.setPadding(20, 10, 20, 10);
+                                        textView2.setTextSize(20);
+                                        textView2.setBackgroundColor(0xffffffff);
+                                        LinearLayout.LayoutParams layoutParams2 = new
+                                                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT);
+                                        layoutParams2.setMargins(120, 20, 30, 10);
+                                        linearLayoutContent.addView(textView2, layoutParams2);
+
+                                       //Toast.makeText(Firma.this, bazaOferta.getNazwa(),Toast.LENGTH_SHORT).show();
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
                             }
+
+
+
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -569,9 +596,9 @@ public class Firma extends AppCompatActivity
         database.child("Danie").child(key).setValue(bazaOferta);
         database.child("Firma").child(mAuth.getUid()).child("LokalOferta").child(editTextDanieLokal.getText().toString().trim()).child(key).setValue("1");
 
-        //Toast.makeText(Firma.this, "Dodano" + bazaOferta.getNazwa(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Firma.this, "Dodano" + editTextDanieLokal.getText().toString().trim(),Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(Firma.this, key,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Firma.this, key,Toast.LENGTH_SHORT).show();
 
         android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
         if(fragment != null)
